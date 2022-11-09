@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Card from "../UI/Card";
 import classes from "./AddUser.module.css";
 import Button from "../UI/Button";
+import ErrorModal from "../UI/ErrorModal";
 
 const AddUser = (props) => {
   const [enteredUserName, setEnteredUserName] = useState("");
@@ -18,7 +19,7 @@ const AddUser = (props) => {
     if (+enteredUserAge < 1) {
       return;
     }
-    console.log(enteredUserName, enteredUserAge);
+    props.onAddUser(enteredUserName, enteredUserAge); //We pass it to the App parent component
     setEnteredUserName("");
     setEnteredUserAge("");
   };
@@ -29,25 +30,28 @@ const AddUser = (props) => {
     setEnteredUserAge(event.target.value);
   };
   return (
-    <Card className={classes.input}>
-      <form onSubmit={addUserHandler}>
-        <label htmlFor='username'>Username</label>
-        <input
-          id='username'
-          type='text'
-          onChange={userNameChangeHandler}
-          value={enteredUserName}
-        />
-        <label htmlFor='age'>Age</label>
-        <input
-          id='age'
-          type='text'
-          onChange={userAgeChangeHandler}
-          value={enteredUserAge}
-        />
-        <Button type='submit'>Add user</Button>
-      </form>
-    </Card>
+    <div>
+      <ErrorModal title='Oups!' message='Something went wrong!' />
+      <Card className={classes.input}>
+        <form onSubmit={addUserHandler}>
+          <label htmlFor='username'>Username</label>
+          <input
+            id='username'
+            type='text'
+            onChange={userNameChangeHandler}
+            value={enteredUserName}
+          />
+          <label htmlFor='age'>Age</label>
+          <input
+            id='age'
+            type='text'
+            onChange={userAgeChangeHandler}
+            value={enteredUserAge}
+          />
+          <Button type='submit'>Add user</Button>
+        </form>
+      </Card>
+    </div>
   );
 };
 
