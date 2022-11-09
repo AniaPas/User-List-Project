@@ -30,7 +30,7 @@ const AddUser = (props) => {
       return;
     }
     props.onAddUser(enteredName, enteredAge); //We pass it to the App parent component
-    nameInputRef.current.value = ""; //Please, use refs to manipulate DOM with caurion, do not add any elements, do not change the classes. here it is acceptable, the state sollution is also fine.
+    nameInputRef.current.value = ""; //Please, use refs to manipulate DOM with caution, do not add any elements, do not change the classes. here it is acceptable, the state sollution is also fine.
     ageInputRef.current.value = "";
   };
 
